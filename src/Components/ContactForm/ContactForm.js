@@ -61,67 +61,6 @@ const FormButton = styled.button`
   }
 `;
 
-// export default function ContactForm({ onAddContact }) {
-//   const dispatch = useDispatch();
-//   const [name, setName] = useState('');
-//   const [number, setNumber] = useState('');
-
-//   const changeState = event => {
-//     const { name, value } = event.currentTarget;
-//     switch (name) {
-//       case 'name':
-//         setName(value);
-//         break;
-//       case 'number':
-//         setNumber(value);
-//         break;
-//       default:
-//         return;
-//     }
-//   };
-
-//   const contactSubmit = event => {
-//     event.preventDefault();
-//     dispatch(actions.addContact({ name, number }));
-//     reset();
-//   };
-
-//   const reset = () => {
-//     setName('');
-//     setNumber('');
-//   };
-
-//   return (
-//     <FormWrapper onSubmit={contactSubmit}>
-//       <FormLabel>
-//         <FormTitle>Name</FormTitle>
-//         <FormInput
-//           type="text"
-//           name="name"
-//           value={name}
-//           onChange={changeState}
-//           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-//           required
-//         />
-//       </FormLabel>
-//       <FormLabel>
-//         <FormTitle>Number</FormTitle>
-//         <FormInput
-//           type="tel"
-//           name="number"
-//           value={number}
-//           onChange={changeState}
-//           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-//           required
-//         />
-//       </FormLabel>
-//       <FormButton type="submit">Add contact</FormButton>
-//     </FormWrapper>
-//   );
-// }
-
 class ContactForm extends Component {
   state = {
     name: '',

@@ -1,5 +1,4 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
-// import data from '../../data/contacts.json';
 import * as actions from './contacts-action';
 import initialData from './contacts-data';
 

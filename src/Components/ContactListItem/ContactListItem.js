@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
-// import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/contacts-action';
 import styled from 'styled-components';
-// import { dispatch } from 'react-hot-toast/dist/core/store';
 
 const ItemWrapper = styled.div`
   display: flex;

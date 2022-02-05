@@ -3,8 +3,6 @@ const initialData = {
     items: [],
     filter: '',
   },
-  // loading: false,
-  // error: null,
 };
 
 export default initialData;

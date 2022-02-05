@@ -1,14 +1,9 @@
-// import { useMemo } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { nanoid } from 'nanoid';
-// import data from '../../data/contacts.json';
 import { connect } from 'react-redux';
 import { getContact } from '../../redux/contacts/contacts-action';
 import styled from 'styled-components';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 import ContactForm from '../ContactForm/ContactForm';
-// import * as actions from '../../redux/contacts/contacts-action';
 
 const Wrapper = styled.div`
   display: flex;
