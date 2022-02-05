@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import * as actions from '../../redux/contacts/contacts-action';
+// import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/contacts-action';
 import styled from 'styled-components';
+// import { dispatch } from 'react-hot-toast/dist/core/store';
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -43,25 +45,34 @@ const DeleteButton = styled.button`
   }
 `;
 
-export default function ContactListItem({ contact }) {
-  const dispatch = useDispatch();
+const ContactListItem = ({ contact, onDeleteContact }) => {
   return (
     <ItemWrapper>
       <ContactInfo>
         <ContactName>{contact.name}</ContactName>
-        <ContactNumber>{contact.number}</ContactNumber>
+        <ContactNumber>{contact.phone}</ContactNumber>
       </ContactInfo>
-      <DeleteButton onClick={() => dispatch(actions.deleteContact(contact.id))}>
+      <DeleteButton onClick={() => onDeleteContact(contact.id)}>
         Delete
       </DeleteButton>
     </ItemWrapper>
   );
-}
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onDeleteContact: contactId => dispatch(deleteContact(contactId)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ContactListItem);
 
 ContactListItem.propTypes = {
   contact: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
   }),
+
+  onDeleteContact: PropTypes.func.isRequired,
 };

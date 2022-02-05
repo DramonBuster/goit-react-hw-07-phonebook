@@ -1,39 +1,58 @@
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ContactListItem from '../ContactListItem/ContactListItem';
+import { getFilteredContacts } from '../../redux/contacts/contacts-selectors';
 
 const List = styled.ul`
   width: 400px;
 `;
 
-const getCurrentPhonebook = (allContacts, filter) => {
-  const normilizedFilter = filter.toLowerCase();
-  return allContacts.filter(contact =>
-    contact.name.toLowerCase().includes(normilizedFilter.trim()),
-  );
+// const getCurrentPhonebook = (allContacts, filter) => {
+//   const normilizedFilter = filter.toLowerCase();
+//   return allContacts.filter(contact =>
+//     contact.name.toLowerCase().includes(normilizedFilter.trim()),
+//   );
+// };
+
+// export default function ContactList() {
+//   const contacts = useSelector(({ contacts: { items, filter } }) =>
+//     getCurrentPhonebook(items, filter),
+//   );
+
+//   return (
+//     <List>
+//       {contacts.map(contact => (
+//         <li key={contact.id}>
+//           <ContactListItem contact={contact} />
+//         </li>
+//       ))}
+//     </List>
+//   );
+// }
+
+const ContactList = ({ contacts }) => (
+  <List>
+    {contacts.map(contact => (
+      <li key={contact.id}>
+        <ContactListItem contact={contact} />
+      </li>
+    ))}
+  </List>
+);
+
+const mapStateToProps = state => {
+  return {
+    contacts: getFilteredContacts(state),
+  };
 };
 
-export default function ContactList() {
-  const contacts = useSelector(({ contacts: { items, filter } }) =>
-    getCurrentPhonebook(items, filter),
-  );
-
-  return (
-    <List>
-      {contacts.map(contact => (
-        <li key={contact.id}>
-          <ContactListItem contact={contact} />
-        </li>
-      ))}
-    </List>
-  );
-}
+export default connect(mapStateToProps, null)(ContactList);
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.string.isRequired,
     }),
   ),
 };

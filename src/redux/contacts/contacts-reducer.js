@@ -1,19 +1,22 @@
-import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
-import data from '../../data/contacts.json';
-import { addContact, deleteContact, filterContact } from './contacts-action';
+import { createReducer, combineReducers } from '@reduxjs/toolkit';
+// import data from '../../data/contacts.json';
+import * as actions from './contacts-action';
+import initialData from './contacts-data';
 
-const items = createReducer(data, {
-  [addContact]: (state, { payload }) => [payload, ...state],
-  [deleteContact]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
+const items = createReducer(initialData.contacts.items, {
+  [actions.getContact.fulfilled]: (_, { payload }) => payload,
+  [actions.addContact.fulfilled]: (state, { payload }) => [payload, ...state],
+  [actions.deleteContact.fulfilled]: (state, { payload }) =>
+    state.filter(element => element.id !== payload),
+  [actions.editContact.fulfilled]: (state, { payload }) =>
+    state.map(element => (element.id === payload.id ? payload : element)),
 });
 
-const filter = createReducer('', {
-  [filterContact]: (_, { payload }) => payload,
+const filter = createReducer(initialData.contacts.filter, {
+  [actions.filterContact]: (_, { payload }) => payload,
 });
 
-export default combineReducers({
-  items,
-  filter,
+export const contactsReducer = combineReducers({
+  items: items,
+  filter: filter,
 });

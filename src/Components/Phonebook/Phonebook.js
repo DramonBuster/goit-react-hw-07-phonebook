@@ -1,8 +1,10 @@
 // import { useMemo } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { nanoid } from 'nanoid';
-import styled from 'styled-components';
 // import data from '../../data/contacts.json';
+import { connect } from 'react-redux';
+import { getContact } from '../../redux/contacts/contacts-action';
+import styled from 'styled-components';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 import ContactForm from '../ContactForm/ContactForm';
@@ -31,7 +33,8 @@ const SubHeading = styled.h2`
   text-align: center;
 `;
 
-export default function Phonebook() {
+const Phonebook = ({ getContact }) => {
+  getContact();
   return (
     <Wrapper>
       <Heading>Phonebook</Heading>
@@ -41,4 +44,10 @@ export default function Phonebook() {
       <ContactList />
     </Wrapper>
   );
-}
+};
+
+const mapDispatchToProps = dispatch => ({
+  getContact: () => dispatch(getContact()),
+});
+
+export default connect(null, mapDispatchToProps)(Phonebook);
